@@ -1,4 +1,5 @@
 import openpyxl, json, os, glob, datetime
+from collections import defaultdict
 
 files = glob.glob('data/*.xlsx') + glob.glob('data/*.xls') + glob.glob('data/*.xlsm')
 if not files:
@@ -13,7 +14,6 @@ ws = wb['Resumen']
 all_rows = list(ws.iter_rows(values_only=True))
 wb.close()
 
-# Columnas a mostrar: índice -> nombre
 KEEP = {
     1:  'Rofina',
     3:  'Descripcion',
@@ -28,14 +28,21 @@ KEEP = {
     24: 'Gran Familia',
     25: 'Familia',
     26: 'Linea',
-    0:  'Centro',
 }
 columns = list(KEEP.values())
 records = []
 
+# Build linea -> gran_familia -> [familias] structure for cascading filters
+structure = defaultdict(lambda: defaultdict(set))
+
 for row in all_rows[2:]:
     if not row or row[3] is None:
         continue
+    linea = str(row[26]).strip() if row[26] else '-'
+    gf    = str(row[24]).strip() if row[24] else '-'
+    fam   = str(row[25]).strip() if row[25] else '-'
+    structure[linea][gf].add(fam)
+
     rec = {}
     for idx, name in KEEP.items():
         v = row[idx] if idx < len(row) else None
@@ -43,13 +50,16 @@ for row in all_rows[2:]:
             rec[name] = ''
         elif name == 'Pct' and isinstance(v, (int, float)):
             rec[name] = round(float(v) * 100, 1)
-        elif name in ('Dias Est', 'Cuarentena', 'Lotes Transito') and isinstance(v, (int, float)):
+        elif name == 'Dias Est' and isinstance(v, (int, float)):
             rec[name] = round(float(v))
         elif isinstance(v, float):
             rec[name] = round(v, 2)
         else:
-            rec[name] = str(v).strip() if v is not None else ''
+            rec[name] = str(v).strip()
     records.append(rec)
+
+# Serialize structure
+struct_out = {l: {g: sorted(f) for g, f in gd.items()} for l, gd in sorted(structure.items())}
 
 mtime = os.path.getmtime(excel_path)
 last_update = datetime.datetime.fromtimestamp(mtime).strftime('%d/%m/%Y %H:%M')
@@ -59,6 +69,7 @@ with open('index.html', 'r', encoding='utf-8') as f:
 
 html = html.replace('__DATA__', json.dumps(records, ensure_ascii=False))
 html = html.replace('__COLUMNS__', json.dumps(columns, ensure_ascii=False))
+html = html.replace('__STRUCTURE__', json.dumps(struct_out, ensure_ascii=False))
 html = html.replace('__LAST_UPDATE__', last_update)
 
 os.makedirs('output', exist_ok=True)
