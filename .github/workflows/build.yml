@@ -6,6 +6,7 @@ on:
       - 'data/**.xlsx'
       - 'data/**.xls'
       - 'data/**.xlsm'
+  workflow_dispatch:
 
 permissions:
   contents: write
