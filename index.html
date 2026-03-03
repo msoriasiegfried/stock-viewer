@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stock Viewer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #1a1a2e; }
+    header {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; padding: 20px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    header h1 { font-size: 1.4rem; font-weight: 600; }
+    header span { font-size: 0.82rem; opacity: 0.7; }
+    .controls {
+      padding: 16px 24px; background: white;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    }
+    .controls input {
+      padding: 8px 14px; border: 1px solid #cbd5e1; border-radius: 8px;
+      font-size: 0.9rem; width: 300px; outline: none; transition: border 0.2s;
+    }
+    .controls input:focus { border-color: #6366f1; }
+    .badge {
+      background: #eef2ff; color: #4f46e5;
+      padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 500;
+    }
+    .table-wrapper { overflow-x: auto; padding: 16px 24px 32px; }
+    table {
+      border-collapse: collapse; width: 100%; background: white;
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08); font-size: 0.83rem;
+    }
+    thead th {
+      background: #1a1a2e; color: #e2e8f0; padding: 11px 14px;
+      text-align: left; white-space: nowrap; cursor: pointer; user-select: none;
+    }
+    thead th:hover { background: #2d2d4e; }
+    thead th.sorted-asc::after { content: ' ↑'; color: #818cf8; }
+    thead th.sorted-desc::after { content: ' ↓'; color: #818cf8; }
+    tbody tr { border-bottom: 1px solid #f1f5f9; transition: background 0.1s; }
+    tbody tr:hover { background: #f8f9ff; }
+    td { padding: 9px 14px; white-space: nowrap; max-width: 220px; overflow: hidden; text-overflow: ellipsis; }
+    td.number { text-align: right; font-variant-numeric: tabular-nums; }
+    .no-results { text-align: center; padding: 40px; color: #94a3b8; font-size: 1rem; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>📦 Control de Stock</h1>
+  <span>Última actualización: __LAST_UPDATE__</span>
+</header>
+<div class="controls">
+  <input type="text" id="searchInput" placeholder="🔍 Buscar por descripción, código..." oninput="filterTable()" />
+  <span class="badge" id="countBadge">Cargando...</span>
+</div>
+<div class="table-wrapper">
+  <table id="dataTable">
+    <thead id="tableHead"></thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults" style="display:none">Sin resultados.</div>
+</div>
+<script>
+  const RAW_DATA = __DATA__;
+  const COLUMNS = __COLUMNS__;
+  const NUM_COLS = ['Stock','Ventas/Día','%','Est. VTA','Días/Est.','VTA Prom 3m','Días/Prom3','Cuarentena','Lotes Tránsito'];
+  let data = RAW_DATA;
+  let sortCol = null, sortAsc = true;
+
+  const thead = document.getElementById('tableHead');
+  const tr = document.createElement('tr');
+  COLUMNS.forEach((col, i) => {
+    const th = document.createElement('th');
+    th.textContent = col;
+    th.onclick = () => sortBy(i, th);
+    tr.appendChild(th);
+  });
+  thead.appendChild(tr);
+
+  function renderTable(rows) {
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+    document.getElementById('noResults').style.display = rows.length === 0 ? 'block' : 'none';
+    document.getElementById('countBadge').textContent = rows.length + ' registros';
+    rows.forEach(row => {
+      const tr = document.createElement('tr');
+      COLUMNS.forEach(col => {
+        const td = document.createElement('td');
+        td.textContent = row[col] ?? '';
+        if (NUM_COLS.includes(col)) td.classList.add('number');
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+  }
+
+  function filterTable() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    renderTable(data.filter(row => COLUMNS.some(col => String(row[col]??'').toLowerCase().includes(q))));
+  }
+
+  function sortBy(colIdx, thEl) {
+    const col = COLUMNS[colIdx];
+    sortAsc = sortCol === col ? !sortAsc : true;
+    sortCol = col;
+    document.querySelectorAll('thead th').forEach(t => t.classList.remove('sorted-asc','sorted-desc'));
+    thEl.classList.add(sortAsc ? 'sorted-asc' : 'sorted-desc');
+    data = [...data].sort((a, b) => {
+      const av = a[col]??'', bv = b[col]??'';
+      const an = parseFloat(av), bn = parseFloat(bv);
+      if (!isNaN(an) && !isNaN(bn)) return sortAsc ? an-bn : bn-an;
+      return sortAsc ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+    });
+    filterTable();
+  }
+  renderTable(data);
+</script>
+</body>
+</html>
