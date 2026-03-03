@@ -123,6 +123,7 @@ td.ok{color:#15803d;font-weight:600;}
   <div class="stat"><div class="stat-n" id="sTotal">—</div><div class="stat-l">Productos</div></div>
   <div class="stat"><div class="stat-n" id="sCritico">—</div><div class="stat-l">Crítico &lt;30 días</div></div>
   <div class="stat"><div class="stat-n" id="sAlerta">—</div><div class="stat-l">Alerta 30–60 días</div></div>
+  <div class="stat"><div class="stat-n">__TOTAL_VTA__</div><div class="stat-l">Total Vtas/Día</div></div>
 </div>
 
 <div class="controls">
@@ -169,12 +170,11 @@ const ALL = __DATA__;
 const COLS = __COLUMNS__;
 const STRUCTURE = __STRUCTURE__;
 
-const SHOW = ['Rofina','Descripcion','Stock','Ventas/Dia','Pct','Est VTA','Dias Est','Cuarentena','Lotes Transito','Observaciones'];
+const SHOW = ['Rofina','Descripcion','Stock','Ventas/Dia','Pct','Est VTA','Dias Est','Cuarentena','Observaciones'];
 const LABELS = {
   'Rofina':'Rofina','Descripcion':'Descripción','Stock':'Stock',
   'Ventas/Dia':'Vtas/Día','Pct':'%','Est VTA':'Est. VTA',
-  'Dias Est':'Días/Est.','Cuarentena':'Cuarentena',
-  'Lotes Transito':'Lotes Tránsito','Observaciones':'Observaciones'
+  'Dias Est':'Días/Est.','Cuarentena':'Cuarentena + Transito','Observaciones':'Observaciones'
 };
 const NUM = new Set(['Stock','Ventas/Dia','Est VTA','Cuarentena','Lotes Transito']);
 
