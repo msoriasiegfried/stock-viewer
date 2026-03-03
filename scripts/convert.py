@@ -55,6 +55,9 @@ for row in all_rows[2:]:
             rec[name] = round(float(v) * 100, 1)
         elif name == 'Dias Est' and isinstance(v, (int, float)):
             rec[name] = round(float(v))
+        elif name == 'Cuarentena' and isinstance(v, (int, float)):
+            lotes = row[16] if len(row) > 16 and isinstance(row[16], (int, float)) else 0
+            rec[name] = round(float(v) + float(lotes))
         elif isinstance(v, float):
             rec[name] = round(v, 2)
         else:
@@ -63,6 +66,12 @@ for row in all_rows[2:]:
 
 # Serialize structure
 struct_out = {l: {g: sorted(f) for g, f in gd.items()} for l, gd in sorted(structure.items())}
+
+total_vta = sum(
+    round(r.get('Ventas/Dia', 0) or 0, 0)
+    for r in records
+    if isinstance(r.get('Ventas/Dia'), (int, float))
+)
 
 mtime = os.path.getmtime(excel_path)
 ARG = datetime.timezone(datetime.timedelta(hours=-3))
@@ -74,7 +83,7 @@ with open('index.html', 'r', encoding='utf-8') as f:
 html = html.replace('__DATA__', json.dumps(records, ensure_ascii=False))
 html = html.replace('__COLUMNS__', json.dumps(columns, ensure_ascii=False))
 html = html.replace('__STRUCTURE__', json.dumps(struct_out, ensure_ascii=False))
-html = html.replace('__LAST_UPDATE__', last_update)
+html = html.replace('__TOTAL_VTA__', f"{int(total_vta):,}".replace(',', '.'))
 
 os.makedirs('output', exist_ok=True)
 with open('output/index.html', 'w', encoding='utf-8') as f:
