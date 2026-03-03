@@ -13,12 +13,22 @@ ws = wb['Resumen']
 all_rows = list(ws.iter_rows(values_only=True))
 wb.close()
 
+# Columnas a mostrar: índice -> nombre
 KEEP = {
-    0: 'Centro', 1: 'Rofina', 2: 'Siegfried', 3: 'Descripcion',
-    4: 'Stock', 5: 'Ventas/Dia', 6: 'Pct', 7: 'Est VTA',
-    8: 'Dias Est', 9: 'VTA Prom 3m', 14: 'Dias Prom3',
-    15: 'Cuarentena', 16: 'Lotes Transito', 17: 'Solicitud',
-    18: 'Observaciones', 24: 'Gran Familia', 25: 'Familia', 26: 'Linea'
+    1:  'Rofina',
+    3:  'Descripcion',
+    4:  'Stock',
+    5:  'Ventas/Dia',
+    6:  'Pct',
+    7:  'Est VTA',
+    8:  'Dias Est',
+    15: 'Cuarentena',
+    16: 'Lotes Transito',
+    18: 'Observaciones',
+    24: 'Gran Familia',
+    25: 'Familia',
+    26: 'Linea',
+    0:  'Centro',
 }
 columns = list(KEEP.values())
 records = []
@@ -31,10 +41,14 @@ for row in all_rows[2:]:
         v = row[idx] if idx < len(row) else None
         if v is None:
             rec[name] = ''
+        elif name == 'Pct' and isinstance(v, (int, float)):
+            rec[name] = round(float(v) * 100, 1)
+        elif name in ('Dias Est', 'Cuarentena', 'Lotes Transito') and isinstance(v, (int, float)):
+            rec[name] = round(float(v))
         elif isinstance(v, float):
             rec[name] = round(v, 2)
         else:
-            rec[name] = str(v).strip()
+            rec[name] = str(v).strip() if v is not None else ''
     records.append(rec)
 
 mtime = os.path.getmtime(excel_path)
