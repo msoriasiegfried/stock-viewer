@@ -5,6 +5,7 @@ on:
     paths:
       - 'data/**.xlsx'
       - 'data/**.xls'
+      - 'data/**.xlsm'
 
 permissions:
   contents: write
