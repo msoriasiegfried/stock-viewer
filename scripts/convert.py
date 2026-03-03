@@ -1,7 +1,7 @@
 import pandas as pd
 import json, os, glob, datetime
 
-files = glob.glob('data/*.xlsx') + glob.glob('data/*.xls')
+files = glob.glob('data/*.xlsx') + glob.glob('data/*.xls') + glob.glob('data/*.xlsm')
 if not files:
     print("No se encontró Excel en data/")
     exit(1)
