@@ -38,6 +38,9 @@ structure = defaultdict(lambda: defaultdict(set))
 for row in all_rows[2:]:
     if not row or row[3] is None:
         continue
+    # Saltar productos discontinuados (columna AN = índice 39)
+    if len(row) > 39 and str(row[39]).strip().upper() == 'DISCONTINUADO':
+        continue
     linea = str(row[26]).strip() if row[26] else '-'
     gf    = str(row[24]).strip() if row[24] else '-'
     fam   = str(row[25]).strip() if row[25] else '-'
