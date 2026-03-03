@@ -9,8 +9,11 @@ if not files:
 excel_path = files[0]
 print(f"Procesando: {excel_path}")
 
-df = pd.read_excel(excel_path, header=1)
+df = pd.read_excel(excel_path, header=1, engine='openpyxl')
 df = df.dropna(how='all', axis=1).dropna(how='all', axis=0)
+
+# Limpiar nombres de columnas
+df.columns = [str(c).strip() for c in df.columns]
 
 column_map = {
     'Centro': 'Centro',
@@ -30,7 +33,17 @@ column_map = {
 }
 df = df.rename(columns={k: v for k, v in column_map.items() if k in df.columns})
 
+# Redondear números
+for col in df.select_dtypes(include='number').columns:
+    df[col] = df[col].round(2)
+
 records = df.fillna('').astype(str).to_dict(orient='records')
+# Limpiar valores "nan"
+for r in records:
+    for k in r:
+        if r[k] in ('nan', 'NaN', 'None'):
+            r[k] = ''
+
 columns = list(df.columns)
 
 mtime = os.path.getmtime(excel_path)
@@ -47,4 +60,4 @@ os.makedirs('output', exist_ok=True)
 with open('output/index.html', 'w', encoding='utf-8') as f:
     f.write(html)
 
-print("✅ Listo: output/index.html generado")
+print(f"✅ Listo: {len(records)} registros procesados")
