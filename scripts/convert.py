@@ -65,7 +65,8 @@ for row in all_rows[2:]:
 struct_out = {l: {g: sorted(f) for g, f in gd.items()} for l, gd in sorted(structure.items())}
 
 mtime = os.path.getmtime(excel_path)
-last_update = datetime.datetime.fromtimestamp(mtime).strftime('%d/%m/%Y %H:%M')
+ARG = datetime.timezone(datetime.timedelta(hours=-3))
+last_update = datetime.datetime.fromtimestamp(mtime, tz=ARG).strftime('%d/%m/%Y %H:%M')
 
 with open('index.html', 'r', encoding='utf-8') as f:
     html = f.read()
