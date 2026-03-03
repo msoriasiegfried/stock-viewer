@@ -83,6 +83,7 @@ with open('index.html', 'r', encoding='utf-8') as f:
 html = html.replace('__DATA__', json.dumps(records, ensure_ascii=False))
 html = html.replace('__COLUMNS__', json.dumps(columns, ensure_ascii=False))
 html = html.replace('__STRUCTURE__', json.dumps(struct_out, ensure_ascii=False))
+html = html.replace('__LAST_UPDATE__', last_update)
 html = html.replace('__TOTAL_VTA__', f"{int(total_vta):,}".replace(',', '.'))
 
 os.makedirs('output', exist_ok=True)
