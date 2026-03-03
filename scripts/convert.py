@@ -1,50 +1,41 @@
-import pandas as pd
-import json, os, glob, datetime
+import openpyxl, json, os, glob, datetime
 
 files = glob.glob('data/*.xlsx') + glob.glob('data/*.xls') + glob.glob('data/*.xlsm')
 if not files:
-    print("No se encontró Excel en data/")
+    print("No Excel found in data/")
     exit(1)
 
 excel_path = files[0]
-print(f"Procesando: {excel_path}")
+print(f"Processing: {excel_path}")
 
-df = pd.read_excel(excel_path, header=1, engine='openpyxl')
-df = df.dropna(how='all', axis=1).dropna(how='all', axis=0)
+wb = openpyxl.load_workbook(excel_path, read_only=True, keep_vba=True, data_only=True)
+ws = wb['Resumen']
+all_rows = list(ws.iter_rows(values_only=True))
+wb.close()
 
-# Limpiar nombres de columnas
-df.columns = [str(c).strip() for c in df.columns]
-
-column_map = {
-    'Centro': 'Centro',
-    'Rofina': 'Rofina',
-    'Siegfried': 'Siegfried',
-    'Descripcion': 'Descripcion',
-    'Stock': 'Stock',
-    'VENTAS al dia': 'Ventas/Día',
-    '%': '%',
-    'Estimado VTA Mazro': 'Est. VTA',
-    'DIAS / ESTIMADO': 'Días/Est.',
-    'VTA (prom ult 3 meses)': 'VTA Prom 3m',
-    'DIAS / PROM 3': 'Días/Prom3',
-    'Cuarentena / Próximos ingresos': 'Cuarentena',
-    'LOTES TRANSITO': 'Lotes Tránsito',
-    'OBSERVACIONES': 'Observaciones',
+KEEP = {
+    0: 'Centro', 1: 'Rofina', 2: 'Siegfried', 3: 'Descripcion',
+    4: 'Stock', 5: 'Ventas/Dia', 6: 'Pct', 7: 'Est VTA',
+    8: 'Dias Est', 9: 'VTA Prom 3m', 14: 'Dias Prom3',
+    15: 'Cuarentena', 16: 'Lotes Transito', 17: 'Solicitud',
+    18: 'Observaciones', 24: 'Gran Familia', 25: 'Familia', 26: 'Linea'
 }
-df = df.rename(columns={k: v for k, v in column_map.items() if k in df.columns})
+columns = list(KEEP.values())
+records = []
 
-# Redondear números
-for col in df.select_dtypes(include='number').columns:
-    df[col] = df[col].round(2)
-
-records = df.fillna('').astype(str).to_dict(orient='records')
-# Limpiar valores "nan"
-for r in records:
-    for k in r:
-        if r[k] in ('nan', 'NaN', 'None'):
-            r[k] = ''
-
-columns = list(df.columns)
+for row in all_rows[2:]:
+    if not row or row[3] is None:
+        continue
+    rec = {}
+    for idx, name in KEEP.items():
+        v = row[idx] if idx < len(row) else None
+        if v is None:
+            rec[name] = ''
+        elif isinstance(v, float):
+            rec[name] = round(v, 2)
+        else:
+            rec[name] = str(v).strip()
+    records.append(rec)
 
 mtime = os.path.getmtime(excel_path)
 last_update = datetime.datetime.fromtimestamp(mtime).strftime('%d/%m/%Y %H:%M')
@@ -60,4 +51,4 @@ os.makedirs('output', exist_ok=True)
 with open('output/index.html', 'w', encoding='utf-8') as f:
     f.write(html)
 
-print(f"✅ Listo: {len(records)} registros procesados")
+print(f"Listo: {len(records)} registros procesados")
