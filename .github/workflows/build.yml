@@ -29,8 +29,18 @@ jobs:
       - name: Convertir Excel a HTML
         run: python scripts/convert.py
 
-      - name: Deploy a GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Subir artefacto para Pages
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./output
+          path: ./output
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy a GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
