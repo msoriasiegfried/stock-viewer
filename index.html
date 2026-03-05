@@ -97,8 +97,8 @@ tbody tr.row-warn td:first-child{border-left:3px solid #f59e0b;}
 td{padding:8px 13px;border-right:1px solid #edf0f4;white-space:nowrap;}
 td:last-child{border-right:none;}
 td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:'Consolas',monospace;font-size:.77rem;color:#334155;}
-td.desc-col{white-space:normal;line-height:1.35;max-width:250px;font-weight:500;}
-td.obs-col{white-space:normal;line-height:1.3;max-width:320px;color:var(--muted);font-size:.75rem;}
+td.desc-col{white-space:normal;line-height:1.35;max-width:280px;font-weight:500;}
+td.obs-col{white-space:normal;line-height:1.4;max-width:380px;color:var(--muted);font-size:.74rem;word-wrap:break-word;}
 td.danger{color:#b91c1c;font-weight:700;}
 td.warn{color:#b45309;font-weight:600;}
 td.ok{color:#15803d;font-weight:600;}
@@ -110,7 +110,7 @@ td.ok{color:#15803d;font-weight:600;}
 
 <header>
   <div class="logo">
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABDADkDASIAAhEBAxEB/8QAGwAAAwEBAQEBAAAAAAAAAAAAAAcIBgkBBQT/xABAEAABAgUCAQcJBQYHAAAAAAABAgMABAUGEQcSIQgTIjFBUWEUFzY3VnGhpdNCdYSztBUWQ1KT0iMyNHKRscH/xAAZAQACAwEAAAAAAAAAAAAAAAADBAAFBgL/xAAvEQABBAEDAQYDCQAAAAAAAAABAAIDEQQFITFBBhITUXGBIrHBMjNhYpGh0fDx/9oADAMBAAIRAxEAPwClLo1Z0/tmuTFErlf8kqEtt51ryN9e3ckKHSSgg9FQPA9sfM8++lXtV8vmfpxNfKe9eVw/hv0zULWEn5Lg4hbHF7PY0sDJHOdZAPI6j0VveffSr2q+XzP04PPvpV7VfL5n6cKbR/k9JrFJlq7ec1MSzMygOsSEuQlwoPEFxRB25H2QM95B4RsUaf8AJ6mqsKDLP079pZ2bG6w6VqUOscXCnd4Dj4QQPlIvYKulxdMY8saXurmqIH7LUeffSr2q+XzP04PPvpV7VfL5n6cJnW3Rm37Vp89VqRVJySZlmkOpRUNqmphSlKHMsrT0y4NudpSRgglQ44Q8DfPIw0QE/i6JgZTO/G51e38K5ZDWzTGfn5eRlLm5yYmHUtNI8hmRuWogAZLeBxI64Ycc8rB9O7f+85b81MdDYNBKZAbVVrOnRYLmiMk3fP8AgUQ8p715XD+G/TNRh7WTJrualIqJSJJU6yJgq6g3vG7PhjMbjlPevK4fw36ZqFrCMn2z6rZ4IvDjH5R8lfesbdVXpbcLdD5zy4yKw2G/8xT9sJxxzs3YxxzECRW3Jj1UauClMWfXJgJrEm3tlHFn/VtJHAZ7VpA494GeODGd5RGibi3pi7bMkysrJcnqcynJz2uNAdfike8d0MzN8Voe1UGlTDTpnYk+1nY+f96KdZ6oT88lpM7PTM0llO1oPOqWGx3JyeA90flj0ggkEYI6xHkJrVgAbBfbsH07t/wC85b81MdDY6xTYJKF2lY1jomtFAA/REEEENLMIgggiKIgggiKIgggiKL//2Q==" alt="Siegfried"/>
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABDADkDASIAAhEBAxEB/8QAGwAAAwEBAQEBAAAAAAAAAAAAAAcIBgkBBQT/xABAEAABAgUCAQcJBQYHAAAAAAABAgMABAUGEQcSIQgTIjFBUWEUFzY3VnGhpdNCdYSztBUWQ1KT0iMyNHKRscH/xAAZAQACAwEAAAAAAAAAAAAAAAADBAAFBgL/xAAvEQABBAEDAQYDCQAAAAAAAAABAAIDEQQFITFBBhITUXGBIrHBMjNhYpGh0fDx/9oADAMBAAIRAxEAPwClLo1Z0/tmuTFErlf8kqEtt51ryN9e3ckKHSSgg9FQPA9sfM8++lXtV8vmfpxNfKe9eVw/hv0zULWEn5Lg4hbHF7PY0sDJHOdZAPI6j0VveffSr2q+XzP04PPvpV7VfL5n6cKbR/k9JrFJlq7ec1MSzMygOsSEuQlwoPEFxRB25H2QM95B4RsUaf8AJ6mqsKDLP079pZ2bG6w6VqUOscXCnd4Dj4QQPlIvYKulxdMY8saXurmqIH7LUeffSr2q+XzP04PPvpV7VfL5n6cJnW3Rm37Vp89VqRVJySZlmkOpRUNqmphSlKHMsrT0y4NudpSRgglQ44Q8DfPIw0QE/i6JgZTO/G51e38K5ZDWzTGfn5eRlLm5yYmHUtNI8hmRuWogAZLeBxI64Ycc8rB9O7f+85b81MdDYNBKZAbVVrOnRYLmiMk3fP8AgUQ8p715XD+G/TNRh7WTJrualIqJSJJU6yJgq6g3vG7PhjMbjlPevK4fw36ZqFrCMn2z6rZ4IvDjH5R8lfesbdVXpbcLdD5zy4yKw2G/8xT9sJxxzs3YxxzECRW3Jj1UauClMWfXJgJrEm3tlHFn/VtJHAZ7VpA494GeODGd5RGibi3pi7bMkysrJcnqcynJz2uNAdfike8d0MzN8Voe1UGlTDTpnYk+1nY+f96KdZ6oT88lpM7PTM0llO1oPOqWGx3JyeA90flj0ggkEYI6xHkJrVgAbBfbsH07t/7zlvzUx0NjY6xTYJKF2lY1jomtFAA/REEEENLMIgggiKIgggiKIgggiKL//2Q==" alt="Siegfried"/>
     <div class="logo-text">
       <div class="logo-name">SIEGFRIED</div>
       <div class="logo-sub">Control de Stock</div>
@@ -177,10 +177,10 @@ const LABELS={
   'Descripcion':'Descripción',
   'Stock':'Stock',
   'Ventas/Dia':'Venta/Día',
-  'Pct':'%',
-  'Est VTA':'Est VTA',
+  'Pct':'% Cumplimiento',
+  'Est VTA':'Est Venta',
   'Dias Est':'Días Disponibles',
-  'Cuarentena':'Cuarentena+Tránsito',
+  'Cuarentena':'Cuarentena',
   'Lotes Transito':'Lotes Tránsito',
   'Observaciones':'Observaciones',
   'Gran Familia':'Gran Familia',
@@ -189,7 +189,7 @@ const LABELS={
 };
 
 const NUM=new Set(['Stock','Ventas/Dia','Pct','Est VTA','Dias Est','Cuarentena','Lotes Transito']);
-const SHOW=['Rofina','Descripcion','Stock','Ventas/Dia','Dias Est','Cuarentena','Gran Familia','Familia','Observaciones'];
+const SHOW=['Rofina','Descripcion','Stock','Ventas/Dia','Est VTA','Dias Est','Pct','Cuarentena','Observaciones'];
 
 let data=[...ALL];
 let fLinea='Todas',fGF='Todas',fFam='Todas';
@@ -198,8 +198,22 @@ let sortCol='Dias Est',sortAsc=true;
 
 function fmt(v,col){
   if(!v) return '';
-  if(col==='Dias Est'||col==='Cuarentena'||col==='Stock'||col==='Lotes Transito') return String(v);
-  if(col==='Ventas/Dia'||col==='Pct'||col==='Est VTA') return String(v).replace('.',',');
+  if(col==='Dias Est'||col==='Cuarentena'||col==='Lotes Transito'){
+    const num=parseInt(v);
+    return isNaN(num)?'':num.toLocaleString('es-AR');
+  }
+  if(col==='Stock'||col==='Est VTA'){
+    const num=parseInt(v);
+    return isNaN(num)?'':num.toLocaleString('es-AR');
+  }
+  if(col==='Ventas/Dia'){
+    const num=parseFloat(v);
+    return isNaN(num)?'':(Math.round(num*100)/100).toLocaleString('es-AR');
+  }
+  if(col==='Pct'){
+    const num=parseFloat(v);
+    return isNaN(num)?'':(Math.round(num*10)/10).toLocaleString('es-AR')+'%';
+  }
   return String(v);
 }
 
