@@ -67,10 +67,13 @@ for row in all_rows[2:]:
 # Serialize structure
 struct_out = {l: {g: sorted(f) for g, f in gd.items()} for l, gd in sorted(structure.items())}
 
+# Calcular total Ventas/Día directo desde Excel (antes de conversión a string)
 total_vta = sum(
-    round(r.get('Ventas/Dia', 0) or 0, 0)
-    for r in records
-    if isinstance(r.get('Ventas/Dia'), (int, float))
+    row[5] for row in all_rows[2:]
+    if row and row[3]
+    and len(row) > 39
+    and str(row[39]).strip().upper() != 'DISCONTINUADO'
+    and isinstance(row[5], (int, float))
 )
 
 mtime = os.path.getmtime(excel_path)
