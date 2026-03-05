@@ -282,7 +282,7 @@ function apply(){
     if(fLinea!=='Todas'&&r.Linea!==fLinea) return false;
     if(fGF!=='Todas'&&r['Gran Familia']!==fGF) return false;
     if(fFam!=='Todas'&&r['Familia']!==fFam) return false;
-    if(soloCritico){const d=parseFloat(r['Dias Est']);if(isNaN(d)||d>=30) return false;}
+    if(soloCritico){const d=parseFloat(r['Dias Est']);if(isNaN(d)||d<=0||d>=30) return false;}
     if(q&&!SHOW.some(c=>String(r[c]||'').toLowerCase().includes(q))) return false;
     return true;
   });
