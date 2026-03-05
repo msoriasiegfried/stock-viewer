@@ -48,7 +48,7 @@ header{
 }
 .search-wrap input:focus{border-color:var(--red);background:white;box-shadow:0 0 0 3px rgba(139,26,43,.08);}
 .search-wrap::before{content:'🔍';position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:.8rem;}
-.vsep{width:1px;height:26px;background:var(--border);flex-shrink:0;}
+.vsep{width:2px;height:28px;background:linear-gradient(180deg,rgba(221,227,234,.3) 0%,rgba(221,227,234,.8) 50%,rgba(221,227,234,.3) 100%);flex-shrink:0;margin:0 8px;}
 .fg{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
 .fl{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
 .tabs{display:flex;gap:4px;flex-wrap:wrap;}
@@ -110,7 +110,7 @@ td.ok{color:#15803d;font-weight:600;}
 
 <header>
   <div class="logo">
-    <img src="data:image/jpeg;base64,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" alt="Siegfried"/>
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABDADkDASIAAhEBAxEB/8QAGwAAAwEBAQEBAAAAAAAAAAAAAAcIBgkBBQT/xABAEAABAgUCAQcJBQYHAAAAAAABAgMABAUGEQcSIQgTIjFBUWEUFzY3VnGhpdNCdYSztBUWQ1KT0iMyNHKRscH/xAAZAQACAwEAAAAAAAAAAAAAAAADBAAFBgL/xAAvEQABBAEDAQYDCQAAAAAAAAABAAIDEQQFITFBBhITUXGBIrHBMjNhYpGh0fDx/9oADAMBAAIRAxEAPwClLo1Z0/tmuTFErlf8kqEtt51ryN9e3ckKHSSgg9FQPA9sfM8++lXtV8vmfpxNfKe9eVw/hv0zULWEn5Lg4hbHF7PY0sDJHOdZAPI6j0VveffSr2q+XzP04PPvpV7VfL5n6cKbR/k9JrFJlq7ec1MSzMygOsSEuQlwoPEFxRB25H2QM95B4RsUaf8AJ6mqsKDLP079pZ2bG6w6VqUOscXCnd4Dj4QQPlIvYKulxdMY8saXurmqIH7LUeffSr2q+XzP04PPvpV7VfL5n6cJnW3Rm37Vp89VqRVJySZlmkOpRUNqmphSlKHMsrT0y4NudpSRgglQ44Q8DfPIw0QE/i6JgZTO/G51e38K5ZDWzTGfn5eRlLm5yYmHUtNI8hmRuWogAZLeBxI64Ycc8rB9O7f+85b81MdDYNBKZAbVVrOnRYLmiMk3fP8AgUQ8p715XD+G/TNRh7WTJrualIqJSJJU6yJgq6g3vG7PhjMbjlPevK4fw36ZqFrCMn2z6rZ4IvDjH5R8lfesbdVXpbcLdD5zy4yKw2G/8xT9sJxxzs3YxxzECRW3Jj1UauClMWfXJgJrEm3tlHFn/VtJHAZ7VpA494GeODGd5RGibi3pi7bMkysrJcnqcynJz2uNAdfike8d0MzN8Voe1UGlTDTpnYk+1nY+f96KdZ6oT88lpM7PTM0llO1oPOqWGx3JyeA90flj0ggkEYI6xHkJrVgAbBfbsH07t/wC85b81MdDY6xTYJKF2lY1jomtFAA/REEEENLMIgggiKIgggiKIgggiKL//2Q==" alt="Siegfried"/>
     <div class="logo-text">
       <div class="logo-name">SIEGFRIED</div>
       <div class="logo-sub">Control de Stock</div>
@@ -121,7 +121,7 @@ td.ok{color:#15803d;font-weight:600;}
 
 <div class="statsbar">
   <div class="stat"><div class="stat-n" id="sTotal">—</div><div class="stat-l">Productos</div></div>
-  <div class="stat"><div class="stat-n" id="sCritico">—</div><div class="stat-l">Crítico &lt;30 días</div></div>
+  <div class="stat"><div class="stat-n" id="sCritico">—</div><div class="stat-l">Crítico ≤30 días</div></div>
   <div class="stat"><div class="stat-n" id="sAlerta">—</div><div class="stat-l">Alerta 30–60 días</div></div>
   <div class="stat"><div class="stat-n">__TOTAL_VTA__</div><div class="stat-l">Total Vtas/Día</div></div>
 </div>
@@ -147,6 +147,7 @@ td.ok{color:#15803d;font-weight:600;}
       <span class="fl">Gran Familia:</span>
       <div class="tabs" id="tabGF"></div>
     </div>
+    <div class="vsep" id="famSep" style="display:none; margin:0 8px;"></div>
     <div class="fg" id="famGroup" style="display:none">
       <span class="fl">Familia:</span>
       <div class="tabs" id="tabFam"></div>
@@ -155,46 +156,60 @@ td.ok{color:#15803d;font-weight:600;}
 </div>
 
 <div class="tbl-wrap">
-  <table>
+  <table id="tbl">
     <thead id="thead"></thead>
     <tbody id="tbody"></tbody>
   </table>
   <div class="empty" id="empty" style="display:none">
     <div class="empty-icon">📭</div>
-    <p>Sin resultados para esta búsqueda.</p>
+    <div>No hay productos que coincidan con los filtros seleccionados.</div>
   </div>
 </div>
 
 <script>
-const ALL = __DATA__;
-const COLS = __COLUMNS__;
-const STRUCTURE = __STRUCTURE__;
+// Data loaded from __DATA__
+const ALL=__DATA__;
+const STRUCTURE=__STRUCTURE__;
+const COLUMNS=__COLUMNS__;
 
-const SHOW = ['Rofina','Descripcion','Stock','Ventas/Dia','Pct','Est VTA','Dias Est','Cuarentena','Observaciones'];
-const LABELS = {
-  'Rofina':'Rofina','Descripcion':'Descripción','Stock':'Stock',
-  'Ventas/Dia':'Vtas/Día','Pct':'%','Est VTA':'Est. VTA',
-  'Dias Est':'Días/Est.','Cuarentena':'Cuarentena','Observaciones':'Observaciones'
+const LABELS={
+  'Rofina':'SAP Rofina',
+  'Descripcion':'Descripción',
+  'Stock':'Stock',
+  'Ventas/Dia':'Venta/Día',
+  'Pct':'%',
+  'Est VTA':'Est VTA',
+  'Dias Est':'Días Disponibles',
+  'Cuarentena':'Cuarentena+Tránsito',
+  'Lotes Transito':'Lotes Tránsito',
+  'Observaciones':'Observaciones',
+  'Gran Familia':'Gran Familia',
+  'Familia':'Familia',
+  'Linea':'Línea',
 };
-const NUM = new Set(['Stock','Ventas/Dia','Est VTA','Cuarentena','Lotes Transito']);
 
-let data=[...ALL], sortCol=null, sortAsc=true;
-let fLinea='Todas', fGF='Todas', fFam='Todas', soloCritico=false;
+const NUM=new Set(['Stock','Ventas/Dia','Pct','Est VTA','Dias Est','Cuarentena','Lotes Transito']);
+const SHOW=['Rofina','Descripcion','Stock','Ventas/Dia','Dias Est','Cuarentena','Gran Familia','Familia','Observaciones'];
+
+let data=[...ALL];
+let fLinea='Todas',fGF='Todas',fFam='Todas';
+let soloCritico=false;
+let sortCol='Dias Est',sortAsc=true;
 
 function fmt(v,col){
-  if(v===''||v===null||v===undefined) return '—';
-  if(col==='Pct') return parseFloat(v).toFixed(1)+'%';
-  if(col==='Dias Est') return Math.round(parseFloat(v)).toLocaleString('es-AR');
-  if(NUM.has(col)) return parseFloat(v).toLocaleString('es-AR',{maximumFractionDigits:0});
-  return v;
+  if(!v) return '';
+  if(col==='Dias Est'||col==='Cuarentena'||col==='Stock'||col==='Lotes Transito') return String(v);
+  if(col==='Ventas/Dia'||col==='Pct'||col==='Est VTA') return String(v).replace('.',',');
+  return String(v);
 }
 
 function stats(rows){
-  document.getElementById('sTotal').textContent=rows.length.toLocaleString('es-AR');
-  const c=rows.filter(r=>{const d=parseFloat(r['Dias Est']);return !isNaN(d)&&d>0&&d<30;}).length;
-  const a=rows.filter(r=>{const d=parseFloat(r['Dias Est']);return !isNaN(d)&&d>=30&&d<60;}).length;
-  document.getElementById('sCritico').textContent=c;
-  document.getElementById('sAlerta').textContent=a;
+  const total=ALL.length;
+  const critico=rows.filter(r=>{const d=parseFloat(r['Dias Est']);return !isNaN(d)&&d<=30;}).length;
+  const alerta=rows.filter(r=>{const d=parseFloat(r['Dias Est']);return !isNaN(d)&&d>30&&d<60;}).length;
+  document.getElementById('sTotal').textContent=total.toLocaleString('es-AR');
+  document.getElementById('sCritico').textContent=critico;
+  document.getElementById('sAlerta').textContent=alerta;
 }
 
 // Build Línea tabs
@@ -211,6 +226,7 @@ function updateCascade(){
   const cascRow=document.getElementById('cascadeRow');
   const gfGroup=document.getElementById('gfGroup');
   const famGroup=document.getElementById('famGroup');
+  const famSep=document.getElementById('famSep');
 
   if(fLinea==='Todas'){
     cascRow.style.display='none';
@@ -235,6 +251,7 @@ function updateCascade(){
 
 function updateFamilias(){
   const famGroup=document.getElementById('famGroup');
+  const famSep=document.getElementById('famSep');
   let fams=[];
   if(fLinea!=='Todas' && STRUCTURE[fLinea]){
     if(fGF!=='Todas' && STRUCTURE[fLinea][fGF]){
@@ -248,9 +265,11 @@ function updateFamilias(){
   }
   if(fams.length>0){
     famGroup.style.display='flex';
+    famSep.style.display='block';
     mkTabs('tabFam',['Todas',...fams],fFam,v=>{fFam=v;apply();});
   } else {
     famGroup.style.display='none';
+    famSep.style.display='none';
   }
 }
 
@@ -282,7 +301,7 @@ function apply(){
     if(fLinea!=='Todas'&&r.Linea!==fLinea) return false;
     if(fGF!=='Todas'&&r['Gran Familia']!==fGF) return false;
     if(fFam!=='Todas'&&r['Familia']!==fFam) return false;
-    if(soloCritico){const d=parseFloat(r['Dias Est']);if(isNaN(d)||d<=0||d>=30) return false;}
+    if(soloCritico){const d=parseFloat(r['Dias Est']);if(isNaN(d)||d>30) return false;}
     if(q&&!SHOW.some(c=>String(r[c]||'').toLowerCase().includes(q))) return false;
     return true;
   });
@@ -309,8 +328,8 @@ function render(rows){
   rows.forEach(row=>{
     const tr=document.createElement('tr');
     const d=parseFloat(row['Dias Est']);
-    if(!isNaN(d)&&d>0&&d<30) tr.classList.add('row-danger');
-    else if(!isNaN(d)&&d>=30&&d<60) tr.classList.add('row-warn');
+    if(!isNaN(d)&&d>=0&&d<=30) tr.classList.add('row-danger');
+    else if(!isNaN(d)&&d>30&&d<60) tr.classList.add('row-warn');
     SHOW.forEach(col=>{
       const td=document.createElement('td');
       const raw=row[col];
@@ -323,7 +342,7 @@ function render(rows){
         td.className='n';td.textContent=display;
       } else if(col==='Dias Est'){
         const n=parseFloat(raw);
-        td.className='n '+(isNaN(n)||n<=0?'':n<30?'danger':n<60?'warn':'ok');
+        td.className='n '+(isNaN(n)||n<0?'':n<=30?'danger':n<60?'warn':'ok');
         td.textContent=display;
       } else if(NUM.has(col)){
         td.className='n';td.textContent=display;
@@ -354,6 +373,4 @@ buildLinea();
 apply();
 </script>
 </body>
-  
 </html>
-
