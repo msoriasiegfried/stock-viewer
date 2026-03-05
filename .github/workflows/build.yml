@@ -6,7 +6,8 @@ on:
       - 'data/**.xlsx'
       - 'data/**.xls'
       - 'data/**.xlsm'
-  workflow_dispatch:
+      - 'index.html'
+      - 'scripts/convert.py'
 
 permissions:
   contents: write
