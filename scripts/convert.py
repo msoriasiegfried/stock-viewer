@@ -22,6 +22,8 @@ KEEP = {
     6:  'Pct',
     7:  'Est VTA',
     8:  'Dias Est',
+    12: 'Dias Venta',
+    14: 'Dias Prom3',
     15: 'Cuarentena',
     16: 'Lotes Transito',
     18: 'Observaciones',
@@ -58,6 +60,8 @@ for row in all_rows[2:]:
         elif name == 'Cuarentena' and isinstance(v, (int, float)):
             lotes = row[16] if len(row) > 16 and isinstance(row[16], (int, float)) else 0
             rec[name] = round(float(v) + float(lotes))
+        elif name in ('Dias Venta', 'Dias Prom3') and isinstance(v, (int, float)):
+            rec[name] = round(float(v))
         elif isinstance(v, float):
             rec[name] = round(v, 2)
         else:
