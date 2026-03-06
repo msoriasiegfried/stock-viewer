@@ -102,6 +102,8 @@ td.obs-col{white-space:normal;line-height:1.4;max-width:380px;color:var(--muted)
 td.danger{color:#b91c1c;font-weight:700;}
 td.warn{color:#b45309;font-weight:600;}
 td.ok{color:#15803d;font-weight:600;}
+td.dias-header{background:#1e3a5f!important;}
+td.dias-col{background:#f0f4ff;font-weight:600;}
 .empty{text-align:center;padding:80px;color:var(--muted);}
 .empty-icon{font-size:2.8rem;margin-bottom:10px;}
 </style>
@@ -176,20 +178,20 @@ const LABELS={
   'Rofina':'SAP Rofina',
   'Descripcion':'Descripción',
   'Stock':'Stock',
-  'Ventas/Dia':'Venta/Día',
+  'Cuarentena':'Cuarentena + Tránsito',
+  'Ventas/Dia':'Est. Producción',
   'Pct':'% Cumplimiento',
-  'Est VTA':'Est Venta',
-  'Dias Est':'Días Disponibles',
-  'Cuarentena':'Cuarentena',
-  'Lotes Transito':'Lotes Tránsito',
+  'Dias Est':'Días s/Estimado',
+  'Dias Venta':'Días s/Venta',
+  'Dias Prom3':'Días s/Prom 3m',
   'Observaciones':'Observaciones',
   'Gran Familia':'Gran Familia',
   'Familia':'Familia',
   'Linea':'Línea',
 };
 
-const NUM=new Set(['Stock','Ventas/Dia','Pct','Est VTA','Dias Est','Cuarentena','Lotes Transito']);
-const SHOW=['Rofina','Descripcion','Stock','Ventas/Dia','Est VTA','Dias Est','Pct','Cuarentena','Observaciones'];
+const NUM=new Set(['Stock','Ventas/Dia','Pct','Est VTA','Dias Est','Dias Venta','Dias Prom3','Cuarentena']);
+const SHOW=['Rofina','Descripcion','Stock','Cuarentena','Ventas/Dia','Pct','Dias Est','Dias Venta','Dias Prom3','Observaciones'];
 
 let data=[...ALL];
 let fLinea='Todas',fGF='Todas',fFam='Todas';
@@ -323,12 +325,14 @@ function apply(){
 }
 
 // Build header
-const thead=document.getElementById('thead');
-const htr=document.createElement('tr');
 SHOW.forEach((col,i)=>{
   const th=document.createElement('th');
   th.textContent=LABELS[col]||col;
   th.onclick=()=>sortBy(col,th);
+  if(['Dias Est','Dias Venta','Dias Prom3'].includes(col)){
+    th.style.background='#1e3a5f';
+    th.style.borderLeft = col==='Dias Est' ? '2px solid #4a90d9' : '';
+  }
   htr.appendChild(th);
 });
 thead.appendChild(htr);
@@ -354,9 +358,11 @@ function render(rows){
         td.className='obs-col';td.textContent=display;
       } else if(col==='Pct'){
         td.className='n';td.textContent=display;
-      } else if(col==='Dias Est'){
+      } else if(['Dias Est','Dias Venta','Dias Prom3'].includes(col)){
         const n=parseFloat(raw);
-        td.className='n '+(isNaN(n)||n<0?'':n<=30?'danger':n<60?'warn':'ok');
+        const colorClass=isNaN(n)||n<0?'':n<=30?'danger':n<60?'warn':'ok';
+        td.className='n dias-col '+colorClass;
+        if(col==='Dias Est') td.style.borderLeft='2px solid #4a90d9';
         td.textContent=display;
       } else if(NUM.has(col)){
         td.className='n';td.textContent=display;
