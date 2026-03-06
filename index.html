@@ -9,7 +9,7 @@
   --red:#8B1A2B;--red-dark:#6e1522;--red-light:#f9f0f1;
   --bg:#f0f2f5;--white:#fff;--border:#dde3ea;
   --text:#1a202c;--muted:#64748b;--subtle:#f8fafc;
-  --dias-border:#d4a800;
+  --dias-border:rgba(139,26,43,.35);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;}
@@ -74,6 +74,8 @@ table{
   border-radius:12px;overflow:hidden;
   box-shadow:0 2px 12px rgba(0,0,0,.07);font-size:.79rem;
 }
+
+/* Headers normales */
 thead th{
   background:#1a202c;color:#cbd5e0;padding:10px 13px;
   text-align:left;white-space:nowrap;cursor:pointer;user-select:none;
@@ -84,13 +86,17 @@ thead th:last-child{border-right:none;}
 thead th:hover{background:#2d3748;}
 thead th.asc::after{content:' ↑';color:#fc8181;}
 thead th.desc::after{content:' ↓';color:#fc8181;}
-thead th.th-dias{
-  background:#78450a;color:#fef3c7;
-  border-right:1px solid rgba(255,255,255,.12);
-}
-thead th.th-dias:hover{background:#92550d;}
-thead th.th-dias-first{border-left:3px solid var(--dias-border);}
 
+/* Headers columnas DÍAS — rojo Siegfried */
+thead th.th-dias{
+  background:var(--red);color:#fff;
+  border-right:1px solid rgba(255,255,255,.15);
+}
+thead th.th-dias:hover{background:var(--red-dark);}
+/* Borde izquierdo grueso para separar el bloque de días */
+thead th.th-dias-first{border-left:4px solid #fff;}
+
+/* Filas */
 tbody tr{border-bottom:1px solid var(--border);transition:background .1s;}
 tbody tr:last-child{border-bottom:none;}
 tbody tr:hover{background:#fdf5f6;}
@@ -103,18 +109,24 @@ tbody tr.row-warn{background:#fffbeb!important;}
 tbody tr.row-warn:hover{background:#fef3c7!important;}
 tbody tr.row-warn td:first-child{border-left:3px solid #f59e0b;}
 
+/* Celdas normales */
 td{padding:8px 13px;border-right:1px solid #edf0f4;white-space:nowrap;}
 td:last-child{border-right:none;}
 td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:'Consolas',monospace;font-size:.77rem;color:#334155;}
 td.desc-col{white-space:normal;line-height:1.35;max-width:280px;font-weight:500;}
 td.obs-col{white-space:normal;line-height:1.4;max-width:380px;color:var(--muted);font-size:.74rem;word-wrap:break-word;}
+
+/* Celdas columnas DÍAS — sin fondo, solo bordes Siegfried */
 td.dias-col{
-  background:#fefce8;text-align:right;
+  text-align:right;
   font-variant-numeric:tabular-nums;font-family:'Consolas',monospace;
   font-size:.77rem;font-weight:600;
-  border-right:1px solid #e9d56a;
+  border-right:1px solid rgba(139,26,43,.2);
 }
-td.dias-col-first{border-left:3px solid var(--dias-border);}
+/* Borde izquierdo grueso en la primera columna de días */
+td.dias-col-first{border-left:4px solid rgba(139,26,43,.4);}
+
+/* Semáforo */
 td.danger{color:#b91c1c;font-weight:700;}
 td.warn{color:#b45309;font-weight:600;}
 td.ok{color:#15803d;font-weight:600;}
@@ -320,7 +332,6 @@ function apply(){
   render(rows);
 }
 
-// Header
 const thead = document.getElementById('thead');
 const htr   = document.createElement('tr');
 SHOW.forEach(col=>{
